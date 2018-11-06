@@ -16,16 +16,19 @@ var stringifyJSON = function(obj) {
     return "null";
   } else if(typeof obj === "string"){
     return '"' + obj + '"';
-  }else if(Array.isArray(obj)) {
+  } else if(Array.isArray(obj)) {
     if(obj.length <= 0) {
       return '[]';
     } else {
-      var toStr = [];
-      obj.forEach(function (elem) {
-        toStr = toStr.push(elem);
-      });
-      toStr = toStr.join('');
-      return '[' + toStr + ']';
+      var array = [];
+      for(var i = 0; i < obj.length; i++) {
+        if(typeof obj[i] === 'string') {
+          array.push('"' + obj[i] + '"');
+        } else if(typeof obj[i] === 'number') {
+          array.push(obj[i]);
+        } 
+      }
+      return '[' + array + ']'
     }
   }
 };

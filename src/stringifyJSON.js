@@ -26,9 +26,11 @@ var stringifyJSON = function(obj) {
           array.push('"' + obj[i] + '"');
         } else if(typeof obj[i] === 'number') {
           array.push(obj[i]);
-        } 
+        } else if(Array.isArray(obj[i])) {
+          array = array.concat(stringifyJSON(obj[i]));
+        }
       }
-      return '[' + array + ']'
+      return '[' + array + ']';
     }
   }
 };

@@ -7,8 +7,10 @@
 var getElementsByClassName = function(className, node) {
   var returnArray = [];
   var nodeCheck = function(node) {
-    if(node.className === className) {
-      returnArray.push(node)
+    if(node.className !== undefined) {
+      if(node.className.includes(className)) {
+        returnArray.push(node)
+      }
     }
     if(node.hasChildNodes()){
       var children = node.childNodes
@@ -18,6 +20,7 @@ var getElementsByClassName = function(className, node) {
     }
   }
   nodeCheck(document.body)
+  //console.log("Result: \n", returnArray)
   return returnArray
 };
 
